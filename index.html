@@ -1,388 +1,387 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oil & Gas Pro Calculator - BAY</title>
-  <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b0e14; color: #e1e7ef; padding-bottom: 60px; }
-    
-    /* HEADER FUTURISTIK */
-    header { padding: 18px; background: linear-gradient(135deg, #121824 0%, #0b0e14 100%); border-bottom: 1px solid #00e676; position: sticky; top: 0; z-index: 10; box-shadow: 0 4px 20px rgba(0,230,118,0.15); }
-    h1 { margin: 0; font-size: 20px; color: #ffffff; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; }
-    header p { margin: 4px 0 0; color: #8a99ad; font-size: 12px; }
-    
-    /* NAVIGASI TAB */
-    nav { display: flex; gap: 8px; overflow-x: auto; padding: 12px 14px; background: #121722; border-bottom: 1px solid #1e2638; -webkit-overflow-scrolling: touch; }
-    nav::-webkit-scrollbar { display: none; }
-    nav button { white-space: nowrap; border: 1px solid #2a364f; background: #182030; color: #9daec8; border-radius: 20px; padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s ease; outline: none; }
-    nav button.active { background: #00e676; color: #080b10; border-color: #00e676; box-shadow: 0 0 12px rgba(0,230,118,0.4); }
-    
-    /* MAIN CONTAINER */
-    main { max-width: 900px; margin: auto; padding: 14px; }
-    .card { background: #131a26; border: 1px solid #202b3d; border-radius: 14px; padding: 16px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-    h3 { font-size: 16px; margin: 0 0 12px; color: #00e676; display: flex; justify-content: space-between; align-items: center; }
-    
-    /* GRID & INPUTS */
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
-    label { display: block; font-size: 11px; color: #8a99ad; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-    input, select { width: 100%; padding: 11px; border-radius: 8px; border: 1px solid #28354d; background: #090c12; color: #fff; font-size: 14px; outline: none; transition: border 0.2s; }
-    input:focus, select:focus { border-color: #00e676; }
-    
-    /* BUTTONS & RESULTS */
-    button.calc { margin-top: 12px; width: 100%; padding: 12px; border: 0; border-radius: 8px; background: linear-gradient(90deg, #00e676 0%, #00b0ff 100%); color: #080b10; font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,230,118,0.25); }
-    button.calc:active { transform: scale(0.98); }
-    
-    .result-box { margin-top: 12px; padding: 12px; border-radius: 8px; background: #0a131a; border-left: 4px solid #00e676; color: #e1e7ef; font-weight: bold; font-size: 13px; display: flex; justify-content: space-between; align-items: center; line-height: 1.5; }
-    .voice-btn { background: #1a2636; border: 1px solid #00e676; color: #00e676; padding: 4px 10px; border-radius: 12px; font-size: 11px; cursor: pointer; display: flex; align-items: center; gap: 4px; flex-shrink: 0; margin-left: 10px; }
-    
-    /* SPEC DISPLAY BOX */
-    .spec-info { background: #0d1420; border: 1px dashed #28354d; border-radius: 8px; padding: 10px; margin-top: 10px; font-size: 12px; color: #b0c2de; }
-    .spec-info div { margin-bottom: 4px; }
-    .spec-info span { color: #00e676; font-weight: bold; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oil & Gas Pro Calculator - BAY</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b0e14; color: #e1e7ef; padding-bottom: 60px; }
+    
+    /* HEADER FUTURISTIK */
+    header { padding: 18px; background: linear-gradient(135deg, #121824 0%, #0b0e14 100%); border-bottom: 1px solid #00e676; position: sticky; top: 0; z-index: 10; box-shadow: 0 4px 20px rgba(0,230,118,0.15); }
+    h1 { margin: 0; font-size: 20px; color: #ffffff; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; }
+    header p { margin: 4px 0 0; color: #8a99ad; font-size: 12px; }
+    
+    /* NAVIGASI TAB */
+    nav { display: flex; gap: 8px; overflow-x: auto; padding: 12px 14px; background: #121722; border-bottom: 1px solid #1e2638; -webkit-overflow-scrolling: touch; }
+    nav::-webkit-scrollbar { display: none; }
+    nav button { white-space: nowrap; border: 1px solid #2a364f; background: #182030; color: #9daec8; border-radius: 20px; padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s ease; outline: none; }
+    nav button.active { background: #00e676; color: #080b10; border-color: #00e676; box-shadow: 0 0 12px rgba(0,230,118,0.4); }
+    
+    /* MAIN CONTAINER */
+    main { max-width: 900px; margin: auto; padding: 14px; }
+    .card { background: #131a26; border: 1px solid #202b3d; border-radius: 14px; padding: 16px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+    h3 { font-size: 16px; margin: 0 0 12px; color: #00e676; display: flex; justify-content: space-between; align-items: center; }
+    
+    /* GRID & INPUTS */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+    label { display: block; font-size: 11px; color: #8a99ad; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { width: 100%; padding: 11px; border-radius: 8px; border: 1px solid #28354d; background: #090c12; color: #fff; font-size: 14px; outline: none; transition: border 0.2s; }
+    input:focus, select:focus { border-color: #00e676; }
+    
+    /* BUTTONS & RESULTS */
+    button.calc { margin-top: 12px; width: 100%; padding: 12px; border: 0; border-radius: 8px; background: linear-gradient(90deg, #00e676 0%, #00b0ff 100%); color: #080b10; font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,230,118,0.25); }
+    button.calc:active { transform: scale(0.98); }
+    
+    .result-box { margin-top: 12px; padding: 12px; border-radius: 8px; background: #0a131a; border-left: 4px solid #00e676; color: #e1e7ef; font-weight: bold; font-size: 13px; display: flex; justify-content: space-between; align-items: center; line-height: 1.5; }
+    .voice-btn { background: #1a2636; border: 1px solid #00e676; color: #00e676; padding: 4px 10px; border-radius: 12px; font-size: 11px; cursor: pointer; display: flex; align-items: center; gap: 4px; flex-shrink: 0; margin-left: 10px; }
+    
+    /* SPEC DISPLAY BOX */
+    .spec-info { background: #0d1420; border: 1px dashed #28354d; border-radius: 8px; padding: 10px; margin-top: 10px; font-size: 12px; color: #b0c2de; }
+    .spec-info div { margin-bottom: 4px; }
+    .spec-info span { color: #00e676; font-weight: bold; }
 
-    /* VOICE CONTROL BAR */
-    .voice-bar { display: flex; align-items: center; justify-content: space-between; background: #121824; border: 1px solid #1e293b; padding: 8px 14px; border-radius: 10px; margin-bottom: 12px; font-size: 12px; }
+    /* VOICE CONTROL BAR */
+    .voice-bar { display: flex; align-items: center; justify-content: space-between; background: #121824; border: 1px solid #1e293b; padding: 8px 14px; border-radius: 10px; margin-bottom: 12px; font-size: 12px; }
 
-    /* MARKING "bay" */
-    .corner-mark { position: fixed; bottom: 12px; right: 12px; background: rgba(18, 24, 36, 0.95); color: #00e676; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; border: 1px solid #00e676; z-index: 999; letter-spacing: 1px; box-shadow: 0 0 10px rgba(0,230,118,0.3); }
-  </style>
+    /* MARKING "BAY" */
+    .corner-mark { position: fixed; bottom: 12px; right: 12px; background: rgba(18, 24, 36, 0.95); color: #00e676; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; border: 1px solid #00e676; z-index: 999; letter-spacing: 1px; box-shadow: 0 0 10px rgba(0,230,118,0.3); }
+  </style>
 
-  <script>
-    /* ASISTEN SUARA AI */
-    var voiceEnabled = true;
-    function toggleVoice() {
-      voiceEnabled = !voiceEnabled;
-      document.getElementById('voiceStatus').textContent = voiceEnabled ? 'Suara: ON 🔊' : 'Suara: OFF 🔇';
-    }
+  <script>
+    /* ASISTEN SUARA AI */
+    var voiceEnabled = true;
+    function toggleVoice() {
+      voiceEnabled = !voiceEnabled;
+      document.getElementById('voiceStatus').textContent = voiceEnabled ? 'Suara: ON 🔊' : 'Suara: OFF 🔇';
+    }
 
-    function speakText(text) {
-      if (!voiceEnabled || !('speechSynthesis' in window)) return;
-      window.speechSynthesis.cancel();
-      var clean = text.replace(/Hasil:/g, '').replace(/\|/g, ',').replace(/bbl/g, 'barrel').replace(/psi/g, 'p s i');
-      var msg = new SpeechSynthesisUtterance("Hasilnya adalah " + clean);
-      msg.lang = 'id-ID';
-      msg.rate = 1.0;
-      window.speechSynthesis.speak(msg);
-    }
+    function speakText(text) {
+      if (!voiceEnabled || !('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      var clean = text.replace(/Hasil:/g, '').replace(/\|/g, ',').replace(/bbl/g, 'barrel').replace(/psi/g, 'p s i');
+      var msg = new SpeechSynthesisUtterance("Hasilnya adalah " + clean);
+      msg.lang = 'id-ID';
+      msg.rate = 1.0;
+      window.speechSynthesis.speak(msg);
+    }
 
-    /* NAVIGASI TAB */
-    function openTab(tabId, btn) {
-      var sections = document.getElementsByTagName('section');
-      for (var i = 0; i < sections.length; i++) { sections[i].style.display = 'none'; }
-      var target = document.getElementById(tabId);
-      if (target) { target.style.display = 'block'; }
-      var buttons = document.querySelectorAll('nav button');
-      for (var j = 0; j < buttons.length; j++) { buttons[j].className = ''; }
-      if (btn) { btn.className = 'active'; }
-    }
+    /* NAVIGASI TAB */
+    function openTab(tabId, btn) {
+      var sections = document.getElementsByTagName('section');
+      for (var i = 0; i < sections.length; i++) { sections[i].style.display = 'none'; }
+      var target = document.getElementById(tabId);
+      if (target) { target.style.display = 'block'; }
+      var buttons = document.querySelectorAll('nav button');
+      for (var j = 0; j < buttons.length; j++) { buttons[j].className = ''; }
+      if (btn) { btn.className = 'active'; }
+    }
 
-    function getVal(id) {
-      var el = document.getElementById(id);
-      if (!el || el.value === '') return NaN;
-      var v = parseFloat(el.value);
-      return isNaN(v) ? NaN : v;
-    }
+    function getVal(id) {
+      var el = document.getElementById(id);
+      if (!el || el.value === '') return NaN;
+      var v = parseFloat(el.value);
+      return isNaN(v) ? NaN : v;
+    }
 
-    function out(id, text) {
-      var el = document.getElementById(id);
-      if (el) { 
-        el.innerHTML = '<span>Hasil: ' + text + '</span><button class="voice-btn" onclick="speakText(\'' + text + '\')">🔊 Dengar</button>';
-        speakText(text);
-      }
-    }
+    function out(id, text) {
+      var el = document.getElementById(id);
+      if (el) { 
+        el.innerHTML = '<span>Hasil: ' + text + '</span><button class="voice-btn" onclick="speakText(\'' + text + '\')">🔊 Dengar</button>';
+        speakText(text);
+      }
+    }
 
-    function n(x) {
-      if (x === null || x === undefined || isNaN(x) || !isFinite(x)) return 'Input tidak valid';
-      return x.toLocaleString('id-ID', { maximumFractionDigits: 4 });
-    }
+    function n(x) {
+      if (x === null || x === undefined || isNaN(x) || !isFinite(x)) return 'Input tidak valid';
+      return x.toLocaleString('id-ID', { maximumFractionDigits: 4 });
+    }
 
-    /* DATABASE SPESIFIKASI PIPA */
-    var pipeDB = {
-      "dp_35": { name: "Drill Pipe 3-1/2\"", od: 3.500, id: 2.764, wt: "13.30 lbs/ft", conn: "NC38", volSteel: 0.014697649, capInt: 0.024 },
-      "dp_28": { name: "Drill Pipe 2-7/8\"", od: 2.875, id: 2.441, wt: "6.65 lbs/ft", conn: "NC26", volSteel: 0.007355175, capInt: 0.019 },
-      "dp_23": { name: "Drill Pipe 2-3/8\"", od: 2.375, id: 1.815, wt: "6.65 lbs/ft", conn: "NC26", volSteel: 0.007480323, capInt: 0.011 },
-      "dc_35": { name: "Drill Collar 3-1/2\"", od: 3.500, id: 1.500, wt: "27.00 lbs/ft", conn: "NC26", volSteel: 0.031880000, capInt: 0.007 },
-      "dc_47": { name: "Drill Collar 4-3/4\"", od: 4.750, id: 2.000, wt: "47.00 lbs/ft", conn: "NC35/NC38", volSteel: 0.059177250, capInt: 0.013 },
-      "tb_28": { name: "Tubing 2-7/8\" EUE", od: 2.875, id: 2.441, wt: "6.50 lbs/ft", conn: "J-55", volSteel: 0.007355175, capInt: 0.019 },
-      "tb_35": { name: "Tubing 3-1/2\" EUE", od: 2.992, id: 2.992, wt: "9.30 lbs/ft", conn: "J-55", volSteel: 0.010513819, capInt: 0.029 },
-      "sr_34": { name: "Sucker Rod 3/4\"", od: 0.750, id: 0, wt: "1.63 lbs/ft", conn: "Solid", volSteel: 0.001793250, capInt: 0.000 },
-      "sr_78": { name: "Sucker Rod 7/8\"", od: 0.875, id: 0, wt: "2.22 lbs/ft", conn: "Solid", volSteel: 0.002440813, capInt: 0.000 },
-      "sr_10": { name: "Sucker Rod 1\"", od: 1.000, id: 0, wt: "2.90 lbs/ft", conn: "Solid", volSteel: 0.003188000, capInt: 0.000 }
-    };
+    /* DATABASE SPESIFIKASI PIPA */
+    var pipeDB = {
+      "dp_35": { name: "Drill Pipe 3-1/2\"", od: 3.500, id: 2.764, wt: "13.30 lbs/ft", conn: "NC38", volSteel: 0.014697649, capInt: 0.024 },
+      "dp_28": { name: "Drill Pipe 2-7/8\"", od: 2.875, id: 2.441, wt: "6.65 lbs/ft", conn: "NC26", volSteel: 0.007355175, capInt: 0.019 },
+      "dp_23": { name: "Drill Pipe 2-3/8\"", od: 2.375, id: 1.815, wt: "6.65 lbs/ft", conn: "NC26", volSteel: 0.007480323, capInt: 0.011 },
+      "dc_35": { name: "Drill Collar 3-1/2\"", od: 3.500, id: 1.500, wt: "27.00 lbs/ft", conn: "NC26", volSteel: 0.031880000, capInt: 0.007 },
+      "dc_47": { name: "Drill Collar 4-3/4\"", od: 4.750, id: 2.000, wt: "47.00 lbs/ft", conn: "NC35/NC38", volSteel: 0.059177250, capInt: 0.013 },
+      "tb_28": { name: "Tubing 2-7/8\" EUE", od: 2.875, id: 2.441, wt: "6.50 lbs/ft", conn: "J-55", volSteel: 0.007355175, capInt: 0.019 },
+      "tb_35": { name: "Tubing 3-1/2\" EUE", od: 2.992, id: 2.992, wt: "9.30 lbs/ft", conn: "J-55", volSteel: 0.010513819, capInt: 0.029 },
+      "sr_34": { name: "Sucker Rod 3/4\"", od: 0.750, id: 0, wt: "1.63 lbs/ft", conn: "Solid", volSteel: 0.001793250, capInt: 0.000 },
+      "sr_78": { name: "Sucker Rod 7/8\"", od: 0.875, id: 0, wt: "2.22 lbs/ft", conn: "Solid", volSteel: 0.002440813, capInt: 0.000 },
+      "sr_10": { name: "Sucker Rod 1\"", od: 1.000, id: 0, wt: "2.90 lbs/ft", conn: "Solid", volSteel: 0.003188000, capInt: 0.000 }
+    };
 
-    function updatePipeSpec() {
-      var key = document.getElementById('pipe_select').value;
-      var info = pipeDB[key];
-      if (info) {
-        document.getElementById('spec_display').innerHTML = 
-          '<div>OD: <span>' + info.od + ' in</span> | ID: <span>' + (info.id || 'Solid') + ' in</span></div>' +
-          '<div>Berat: <span>' + info.wt + '</span> | Koneksi/Grade: <span>' + info.conn + '</span></div>' +
-          '<div>Vol Steel: <span>' + info.volSteel + ' bbl/m</span> | Cap Int: <span>' + info.capInt + ' bbl/m</span></div>';
-      }
-    }
+    function updatePipeSpec() {
+      var key = document.getElementById('pipe_select').value;
+      var info = pipeDB[key];
+      if (info) {
+        document.getElementById('spec_display').innerHTML = 
+          '<div>OD: <span>' + info.od + ' in</span> | ID: <span>' + (info.id || 'Solid') + ' in</span></div>' +
+          '<div>Berat: <span>' + info.wt + '</span> | Koneksi/Grade: <span>' + info.conn + '</span></div>' +
+          '<div>Vol Steel: <span>' + info.volSteel + ' bbl/m</span> | Cap Int: <span>' + info.capInt + ' bbl/m</span></div>';
+      }
+    }
 
-    /* KALKULASI WELL VOLUME & TOTAL CYCLE */
-    function calcWellCycle() {
-      var cID = getVal('wc_cid');
-      var cLen = getVal('wc_clen');
-      var tOD = getVal('wc_tod');
-      var tID = getVal('wc_tid');
-      var tLen = getVal('wc_tlen');
-      var unit = document.getElementById('wc_unit').value;
+    /* KALKULASI WELL VOLUME & TOTAL CYCLE */
+    function calcWellCycle() {
+      var cID = getVal('wc_cid');
+      var cLen = getVal('wc_clen');
+      var tOD = getVal('wc_tod');
+      var tID = getVal('wc_tid');
+      var tLen = getVal('wc_tlen');
+      var unit = document.getElementById('wc_unit').value;
 
-      if (isNaN(cID) || isNaN(cLen) || isNaN(tOD) || isNaN(tID) || isNaN(tLen)) {
-        out('wc_r', 'Input tidak valid');
-        return;
-      }
+      if (isNaN(cID) || isNaN(cLen) || isNaN(tOD) || isNaN(tID) || isNaN(tLen)) {
+        out('wc_r', 'Input tidak valid');
+        return;
+      }
 
-      var cLenFt = (unit === 'm') ? (cLen * 3.28084) : cLen;
-      var tLenFt = (unit === 'm') ? (tLen * 3.28084) : tLen;
+      var cLenFt = (unit === 'm') ? (cLen * 3.28084) : cLen;
+      var tLenFt = (unit === 'm') ? (tLen * 3.28084) : tLen;
 
-      if (tLenFt > cLenFt) {
-        out('wc_r', 'Panjang tubing tidak boleh melebihi casing!');
-        return;
-      }
+      if (tLenFt > cLenFt) {
+        out('wc_r', 'Panjang tubing tidak boleh melebihi casing!');
+        return;
+      }
 
-      // 1. Volume Internal Tubing
-      var vTbInt = (Math.pow(tID, 2) / 1029.4) * tLenFt;
+      var vTbInt = (Math.pow(tID, 2) / 1029.4) * tLenFt;
+      var vAnnUpper = ((Math.pow(cID, 2) - Math.pow(tOD, 2)) / 1029.4) * tLenFt;
+      var openLenFt = cLenFt - tLenFt;
+      var vCasingLower = (Math.pow(cID, 2) / 1029.4) * openLenFt;
 
-      // 2. Volume Annulus Tubing-Casing (Permukaan sampai Shoe Tubing)
-      var vAnnUpper = ((Math.pow(cID, 2) - Math.pow(tOD, 2)) / 1029.4) * tLenFt;
+      var vAnnTotal = vAnnUpper + vCasingLower;
+      var vCycle = vTbInt + vAnnTotal;
 
-      // 3. Volume Casing Terbuka di bawah Shoe Tubing
-      var openLenFt = cLenFt - tLenFt;
-      var vCasingLower = (Math.pow(cID, 2) / 1029.4) * openLenFt;
+      var resText = n(vTbInt) + ' bbl (Vol Tubing) | ' + n(vAnnTotal) + ' bbl (Vol Annulus Total) | ' + n(vCycle) + ' bbl (Total Cycle)';
+      out('wc_r', resText);
+    }
 
-      // Total Volume Annulus Sumur
-      var vAnnTotal = vAnnUpper + vCasingLower;
+    /* KALKULASI TONG TORQUE & HWU FORCE */
+    function calcTongTorque() {
+      var maxTong = getVal('tong_max');
+      var targetTorque = getVal('tong_req');
+      var maxPress = 3000;
+      if (isNaN(maxTong) || isNaN(targetTorque) || maxTong <= 0) { out('tong_r', 'Input tidak valid'); return; }
+      var pressNeeded = (targetTorque * maxPress) / maxTong;
+      out('tong_r', Math.round(pressNeeded) + ' psi (' + pressNeeded.toFixed(1) + ' psi)');
+    }
 
-      // Total Volume Cycle (Internal Tubing + Annulus Total)
-      var vCycle = vTbInt + vAnnTotal;
+    function calcHWUForce() {
+      var maxHWU = getVal('hwu_max');
+      var targetHWU = getVal('hwu_req');
+      var maxPress = 3000;
+      if (isNaN(maxHWU) || isNaN(targetHWU) || maxHWU <= 0) { out('hwu_r', 'Input tidak valid'); return; }
+      var pressNeeded = (targetHWU * maxPress) / maxHWU;
+      out('hwu_r', Math.round(pressNeeded) + ' psi (' + pressNeeded.toFixed(1) + ' psi)');
+    }
 
-      var resText = n(vTbInt) + ' bbl (Vol Tubing) | ' + n(vAnnTotal) + ' bbl (Vol Annulus Total) | ' + n(vCycle) + ' bbl (Total Cycle)';
-      out('wc_r', resText);
-    }
+    /* KALKULASI PIPA & TANGKI */
+    function calcDisplace() {
+      var key = document.getElementById('pipe_select').value;
+      var len = getVal('pipe_len');
+      var unit = document.getElementById('pipe_unit').value;
+      var info = pipeDB[key];
+      if (isNaN(len) || !info) { out('disp_r', 'Input tidak valid'); return; }
+      var lenMeter = (unit === 'ft') ? (len * 0.3048) : len;
+      var totalDispBbl = lenMeter * info.volSteel;
+      var totalCapBbl = lenMeter * info.capInt;
+      out('disp_r', n(totalDispBbl) + ' bbl Displace | ' + n(totalCapBbl) + ' bbl Cap Int');
+    }
 
-    /* KALKULASI TONG TORQUE & HWU FORCE */
-    function calcTongTorque() {
-      var maxTong = getVal('tong_max');
-      var targetTorque = getVal('tong_req');
-      var maxPress = 3000;
-      if (isNaN(maxTong) || isNaN(targetTorque) || maxTong <= 0) { out('tong_r', 'Input tidak valid'); return; }
-      var pressNeeded = (targetTorque * maxPress) / maxTong;
-      out('tong_r', Math.round(pressNeeded) + ' psi (' + pressNeeded.toFixed(1) + ' psi)');
-    }
+    function calcTankBox() {
+      var p = getVal('tb_p'), l = getVal('tb_l'), t = getVal('tb_t');
+      if (isNaN(p) || isNaN(l) || isNaN(t)) { out('tank_r', 'Input tidak valid'); return; }
+      var m3 = p * l * t;
+      var liter = m3 * 1000;
+      var bbl = m3 * 6.28981;
+      out('tank_r', n(liter) + ' Liter | ' + n(bbl) + ' bbl (' + n(m3) + ' m³)');
+    }
 
-    function calcHWUForce() {
-      var maxHWU = getVal('hwu_max');
-      var targetHWU = getVal('hwu_req');
-      var maxPress = 3000;
-      if (isNaN(maxHWU) || isNaN(targetHWU) || maxHWU <= 0) { out('hwu_r', 'Input tidak valid'); return; }
-      var pressNeeded = (targetHWU * maxPress) / maxHWU;
-      out('hwu_r', Math.round(pressNeeded) + ' psi (' + pressNeeded.toFixed(1) + ' psi)');
-    }
-
-    /* KALKULASI PIPA & TANGKI */
-    function calcDisplace() {
-      var key = document.getElementById('pipe_select').value;
-      var len = getVal('pipe_len');
-      var unit = document.getElementById('pipe_unit').value;
-      var info = pipeDB[key];
-      if (isNaN(len) || !info) { out('disp_r', 'Input tidak valid'); return; }
-      var lenMeter = (unit === 'ft') ? (len * 0.3048) : len;
-      var totalDispBbl = lenMeter * info.volSteel;
-      var totalCapBbl = lenMeter * info.capInt;
-      out('disp_r', n(totalDispBbl) + ' bbl Displace | ' + n(totalCapBbl) + ' bbl Cap Int');
-    }
-
-    function calcTankBox() {
-      var p = getVal('tb_p'), l = getVal('tb_l'), t = getVal('tb_t');
-      if (isNaN(p) || isNaN(l) || isNaN(t)) { out('tank_r', 'Input tidak valid'); return; }
-      var m3 = p * l * t;
-      var liter = m3 * 1000;
-      var bbl = m3 * 6.28981;
-      out('tank_r', n(liter) + ' Liter | ' + n(bbl) + ' bbl (' + n(m3) + ' m³)');
-    }
-
-    /* KALKULASI LAINNYA */
-    function calcHP() { out('hp_r', n(0.052 * getVal('hp_mw') * getVal('hp_tvd')) + ' psi'); }
-    function calcPG() { out('pg_r', n(0.052 * getVal('pg_mw')) + ' psi/ft'); }
-    function calcMW() { out('mwr', n(getVal('mwp') / (0.052 * getVal('mwt'))) + ' ppg'); }
-    function calcP() { out('pr', n(getVal('pgr') * getVal('pgt')) + ' psi'); }
-    function calcBF() { out('bfr', n((65.5 - getVal('bfmw')) / 65.5)); }
-    function calcBW() { out('bwr', n(getVal('bwa') * getVal('bfb')) + ' lb'); }
-    function pipeVol() { var c = Math.pow(getVal('pid'), 2) / 1029.4; out('pvr', n(c * getVal('plen')) + ' bbl'); }
-    function annVol() { var c = (Math.pow(getVal('ahid'), 2) - Math.pow(getVal('aod'), 2)) / 1029.4; out('avr', n(c * getVal('alen')) + ' bbl'); }
-    function pumpBPS() { out('pbr', n(0.000243 * Math.pow(getVal('pd'), 2) * getVal('pl') * (getVal('pe') / 100)) + ' bbl/stroke'); }
-    function calcKMW() { out('kmw_r', n(getVal('kmw_omw') + (getVal('kmw_sidpp') / (0.052 * getVal('kmw_tvd')))) + ' ppg'); }
-  </script>
+    /* KALKULASI LAINNYA */
+    function calcHP() { out('hp_r', n(0.052 * getVal('hp_mw') * getVal('hp_tvd')) + ' psi'); }
+    function calcPG() { out('pg_r', n(0.052 * getVal('pg_mw')) + ' psi/ft'); }
+    function calcMW() { out('mwr', n(getVal('mwp') / (0.052 * getVal('mwt'))) + ' ppg'); }
+    function calcP() { out('pr', n(getVal('pgr') * getVal('pgt')) + ' psi'); }
+    function calcBF() { out('bfr', n((65.5 - getVal('bfmw')) / 65.5)); }
+    function calcBW() { out('bwr', n(getVal('bwa') * getVal('bfb')) + ' lb'); }
+    function pipeVol() { var c = Math.pow(getVal('pid'), 2) / 1029.4; out('pvr', n(c * getVal('plen')) + ' bbl'); }
+    function annVol() { var c = (Math.pow(getVal('ahid'), 2) - Math.pow(getVal('aod'), 2)) / 1029.4; out('avr', n(c * getVal('alen')) + ' bbl'); }
+    function pumpBPS() { out('pbr', n(0.000243 * Math.pow(getVal('pd'), 2) * getVal('pl') * (getVal('pe') / 100)) + ' bbl/stroke'); }
+    function calcKMW() { out('kmw_r', n(getVal('kmw_omw') + (getVal('kmw_sidpp') / (0.052 * getVal('kmw_tvd')))) + ' ppg'); }
+  </script>
 </head>
 <body onload="updatePipeSpec()">
 
-  <header>
-    <h1>🛢️ Oil & Gas Pro Calculator</h1>
-    <p>Offline High-Precision Field Tool • Quick Reference BAY Data</p>
-  </header>
+  <header>
+    <h1>🛢️ Oil & Gas Pro Calculator</h1>
+    <p>Offline High-Precision Field Tool • Quick Reference BAY Data</p>
+  </header>
 
-  <nav>
-    <button type="button" class="active" onclick="openTab('sec_pipedb', this)">Ref & Displace Pipa</button>
-    <button type="button" onclick="openTab('sec_tong_hwu', this)">Tong & HWU</button>
-    <button type="button" onclick="openTab('sec_tank', this)">Tangki Persegi</button>
-    <button type="button" onclick="openTab('sec_pressure', this)">Pressure</button>
-    <button type="button" onclick="openTab('sec_snubbing', this)">Snubbing</button>
-    <button type="button" onclick="openTab('sec_volume', this)">Volume & Pipe</button>
-    <button type="button" onclick="openTab('sec_pump', this)">Pump</button>
-    <button type="button" onclick="openTab('sec_wellcontrol', this)">Well Control</button>
-  </nav>
+  <nav>
+    <button type="button" class="active" onclick="openTab('sec_pipedb', this)">Ref & Displace Pipa</button>
+    <button type="button" onclick="openTab('sec_tong_hwu', this)">Tong & HWU</button>
+    <button type="button" onclick="openTab('sec_tank', this)">Tangki Persegi</button>
+    <button type="button" onclick="openTab('sec_pressure', this)">Pressure</button>
+    <button type="button" onclick="openTab('sec_snubbing', this)">Snubbing</button>
+    <button type="button" onclick="openTab('sec_volume', this)">Volume & Pipe</button>
+    <button type="button" onclick="openTab('sec_pump', this)">Pump</button>
+    <button type="button" onclick="openTab('sec_wellcontrol', this)">Well Control</button>
+  </nav>
 
-  <main>
-    <div class="voice-bar">
-      <span>Mode Bantuan Suara Otomatis</span>
-      <button class="voice-btn" id="voiceStatus" onclick="toggleVoice()">Suara: ON 🔊</button>
-    </div>
+  <main>
+    <div class="voice-bar">
+      <span>Mode Bantuan Suara Otomatis</span>
+      <button class="voice-btn" id="voiceStatus" onclick="toggleVoice()">Suara: ON 🔊</button>
+    </div>
 
-    <!-- TAB 1: REF & DISPLACE PIPA -->
-    <section id="sec_pipedb" style="display: block;">
-      <div class="card">
-        <h3>Spesifikasi & Displacement Volume Pipa</h3>
-        <div>
-          <label>Pilih Jenis Pipa / Rod</label>
-          <select id="pipe_select" onchange="updatePipeSpec()">
-            <option value="dp_35">Drill Pipe 3-1/2"</option>
-            <option value="dp_28">Drill Pipe 2-7/8"</option>
-            <option value="dp_23">Drill Pipe 2-3/8"</option>
-            <option value="dc_35">Drill Collar 3-1/2"</option>
-            <option value="dc_47">Drill Collar 4-3/4"</option>
-            <option value="tb_28">Tubing 2-7/8" EUE</option>
-            <option value="tb_35">Tubing 3-1/2" EUE</option>
-            <option value="sr_34">Sucker Rod 3/4"</option>
-            <option value="sr_78">Sucker Rod 7/8"</option>
-            <option value="sr_10">Sucker Rod 1"</option>
-          </select>
-        </div>
+    <!-- TAB 1: REF & DISPLACE PIPA -->
+    <section id="sec_pipedb" style="display: block;">
+      <div class="card">
+        <h3>Spesifikasi & Displacement Volume Pipa</h3>
+        <div>
+          <label>Pilih Jenis Pipa / Rod</label>
+          <select id="pipe_select" onchange="updatePipeSpec()">
+            <option value="dp_35">Drill Pipe 3-1/2"</option>
+            <option value="dp_28">Drill Pipe 2-7/8"</option>
+            <option value="dp_23">Drill Pipe 2-3/8"</option>
+            <option value="dc_35">Drill Collar 3-1/2"</option>
+            <option value="dc_47">Drill Collar 4-3/4"</option>
+            <option value="tb_28">Tubing 2-7/8" EUE</option>
+            <option value="tb_35">Tubing 3-1/2" EUE</option>
+            <option value="sr_34">Sucker Rod 3/4"</option>
+            <option value="sr_78">Sucker Rod 7/8"</option>
+            <option value="sr_10">Sucker Rod 1"</option>
+          </select>
+        </div>
 
-        <div class="spec-info" id="spec_display">-- Memuat Spesifikasi --</div>
+        <div class="spec-info" id="spec_display">-- Memuat Spesifikasi --</div>
 
-        <div class="grid" style="margin-top:12px;">
-          <div><label>Panjang Pipa</label><input type="number" id="pipe_len" placeholder="Masukkan panjang" step="any"></div>
-          <div>
-            <label>Satuan Panjang</label>
-            <select id="pipe_unit">
-              <option value="m">Meter (m)</option>
-              <option value="ft">Feet (ft)</option>
-            </select>
-          </div>
-        </div>
-        <button type="button" class="calc" onclick="calcDisplace()">Hitung Displace Volume</button>
-        <div class="result-box" id="disp_r">Hasil: —</div>
-      </div>
-    </section>
+        <div class="grid" style="margin-top:12px;">
+          <div><label>Panjang Pipa</label><input type="number" id="pipe_len" placeholder="Masukkan panjang" step="any"></div>
+          <div>
+            <label>Satuan Panjang</label>
+            <select id="pipe_unit">
+              <option value="m">Meter (m)</option>
+              <option value="ft">Feet (ft)</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="calc" onclick="calcDisplace()">Hitung Displace Volume</button>
+        <div class="result-box" id="disp_r">Hasil: —</div>
+      </div>
+    </section>
 
-    <!-- TAB 2: TONG & HWU FORCE -->
-    <section id="sec_tong_hwu" style="display: none;">
-      <div class="card">
-        <h3>Tong Torque Calculator</h3>
-        <div class="grid">
-          <div><label>Max Tong Torque (ft-lbs)</label><input type="number" id="tong_max" value="35000" step="any"></div>
-          <div><label>Torque Needed (ft-lbs)</label><input type="number" id="tong_req" value="10000" step="any"></div>
-        </div>
-        <button type="button" class="calc" onclick="calcTongTorque()">Hitung Pressure Tong</button>
-        <div class="result-box" id="tong_r">Hasil: —</div>
-      </div>
+    <!-- TAB 2: TONG & HWU FORCE -->
+    <section id="sec_tong_hwu" style="display: none;">
+      <div class="card">
+        <h3>Tong Torque Calculator</h3>
+        <div class="grid">
+          <div><label>Max Tong Torque (ft-lbs)</label><input type="number" id="tong_max" value="35000" step="any"></div>
+          <div><label>Torque Needed (ft-lbs)</label><input type="number" id="tong_req" value="10000" step="any"></div>
+        </div>
+        <button type="button" class="calc" onclick="calcTongTorque()">Hitung Pressure Tong</button>
+        <div class="result-box" id="tong_r">Hasil: —</div>
+      </div>
 
-      <div class="card">
-        <h3>HWU Force Calculator</h3>
-        <div class="grid">
-          <div><label>Max HWU Force (lbs)</label><input type="number" id="hwu_max" value="150000" step="any"></div>
-          <div><label>Force Needed (lbs)</label><input type="number" id="hwu_req" value="50000" step="any"></div>
-        </div>
-        <button type="button" class="calc" onclick="calcHWUForce()">Hitung Pressure HWU</button>
-        <div class="result-box" id="hwu_r">Hasil: —</div>
-      </div>
-    </section>
+      <div class="card">
+        <h3>HWU Force Calculator</h3>
+        <div class="grid">
+          <div><label>Max HWU Force (lbs)</label><input type="number" id="hwu_max" value="150000" step="any"></div>
+          <div><label>Force Needed (lbs)</label><input type="number" id="hwu_req" value="50000" step="any"></div>
+        </div>
+        <button type="button" class="calc" onclick="calcHWUForce()">Hitung Pressure HWU</button>
+        <div class="result-box" id="hwu_r">Hasil: —</div>
+      </div>
+    </section>
 
-    <!-- TAB 3: TANGKI PERSEGI PANJANG -->
-    <section id="sec_tank" style="display: none;">
-      <div class="card">
-        <h3>Volume Tangki Persegi Panjang</h3>
-        <div class="grid">
-          <div><label>Panjang (m)</label><input type="number" id="tb_p" step="any"></div>
-          <div><label>Lebar (m)</label><input type="number" id="tb_l" step="any"></div>
-          <div><label>Tinggi / Level Fluida (m)</label><input type="number" id="tb_t" step="any"></div>
-        </div>
-        <button type="button" class="calc" onclick="calcTankBox()">Hitung Volume Tangki</button>
-        <div class="result-box" id="tank_r">Hasil: —</div>
-      </div>
-    </section>
+    <!-- TAB 3: TANGKI PERSEGI PANJANG -->
+    <section id="sec_tank" style="display: none;">
+      <div class="card">
+        <h3>Volume Tangki Persegi Panjang</h3>
+        <div class="grid">
+          <div><label>Panjang (m)</label><input type="number" id="tb_p" step="any"></div>
+          <div><label>Lebar (m)</label><input type="number" id="tb_l" step="any"></div>
+          <div><label>Tinggi / Level Fluida (m)</label><input type="number" id="tb_t" step="any"></div>
+        </div>
+        <button type="button" class="calc" onclick="calcTankBox()">Hitung Volume Tangki</button>
+        <div class="result-box" id="tank_r">Hasil: —</div>
+      </div>
+    </section>
 
-    <!-- TAB 4: PRESSURE -->
-    <section id="sec_pressure" style="display: none;">
-      <div class="card">
-        <h3>Hydrostatic Pressure</h3>
-        <div class="grid">
-          <div><label>MW (ppg)</label><input type="number" id="hp_mw" step="any"></div>
-          <div><label>TVD (ft)</label><input type="number" id="hp_tvd" step="any"></div>
-        </div>
-        <button type="button" class="calc" onclick="calcHP()">Hitung</button>
-        <div class="result-box" id="hp_r">Hasil: —</div>
-      </div>
+    <!-- TAB 4: PRESSURE -->
+    <section id="sec_pressure" style="display: none;">
+      <div class="card">
+        <h3>Hydrostatic Pressure</h3>
+        <div class="grid">
+          <div><label>MW (ppg)</label><input type="number" id="hp_mw" step="any"></div>
+          <div><label>TVD (ft)</label><input type="number" id="hp_tvd" step="any"></div>
+        </div>
+        <button type="button" class="calc" onclick="calcHP()">Hitung</button>
+        <div class="result-box" id="hp_r">Hasil: —</div>
+      </div>
 
-      <div class="card">
-        <h3>Pressure Gradient</h3>
-        <div><label>MW (ppg)</label><input type="number" id="pg_mw" step="any"></div>
-        <button type="button" class="calc" onclick="calcPG()">Hitung</button>
-        <div class="result-box" id="pg_r">Hasil: —</div>
-      </div>
-    </section>
+      <div class="card">
+        <h3>Pressure Gradient</h3>
+        <div><label>MW (ppg)</label><input type="number" id="pg_mw" step="any"></div>
+        <button type="button" class="calc" onclick="calcPG()">Hitung</button>
+        <div class="result-box" id="pg_r">Hasil: —</div>
+      </div>
 
-    <!-- TAB 5: SNUBBING -->
-    <section id="sec_snubbing" style="display: none;">
-      <div class="card">
-        <h3>Buoyancy Factor</h3>
-        <div><label>MW (ppg)</label><input type="number" id="bfmw" step="any"></div>
-        <button type="button" class="calc" onclick="calcBF()">Hitung</button>
-        <div class="result-box" id="bfr">Hasil: —</div>
-      </div>
+      <div class="card">
+        <h3>Equivalent Mud Weight (EMW)</h3>
+        <div class="grid">
+          <div><label>Pressure (psi)</label><input type="number" id="mwp" step="any"></div>
+          <div><label>TVD (ft)</label><input type="number" id="mwt" step="any"></div>
+        </div>
+        <button type="button" class="calc" onclick="calcMW()">Hitung EMW</button>
+        <div class="result-box" id="mwr">Hasil: —</div>
+      </div>
+    </section>
 
-      <div class="card">
-        <h3>Buoyed Pipe Weight</h3>
-        <div class="grid">
-          <div><label>Weight in Air (lb)</label><input type="number" id="bwa" step="any"></div>
-          <div><label>BF</label><input type="number" id="bfb" step="any"></div>
-        </div>
-        <button type="button" class="calc" onclick="calcBW()">Hitung</button>
-        <div class="result-box" id="bwr">Hasil: —</div>
-      </div>
-    </section>
+    <!-- TAB 5: SNUBBING -->
+    <section id="sec_snubbing" style="display: none;">
+      <div class="card">
+        <h3>Buoyancy Factor</h3>
+        <div><label>MW (ppg)</label><input type="number" id="bfmw" step="any"></div>
+        <button type="button" class="calc" onclick="calcBF()">Hitung</button>
+        <div class="result-box" id="bfr">Hasil: —</div>
+      </div>
 
-    <!-- TAB 6: VOLUME & PIPE -->
-    <section id="sec_volume" style="display: none;">
-      <div class="card">
-        <h3>Well Volume & Total Cycle (Tubing & Annulus)</h3>
-        <div class="grid">
-          <div><label>ID Casing (in)</label><input type="number" id="wc_cid" placeholder="misal 6.184" step="any"></div>
-          <div><label>Panjang Casing</label><input type="number" id="wc_clen" placeholder="misal 1000" step="any"></div>
-          <div><label>OD Tubing (in)</label><input type="number" id="wc_tod" placeholder="misal 2.875" step="any"></div>
-          <div><label>ID Tubing (in)</label><input type="number" id="wc_tid" placeholder="misal 2.441" step="any"></div>
-          <div><label>Panjang Tubing</label><input type="number" id="wc_tlen" placeholder="misal 500" step="any"></div>
-          <div>
-            <label>Satuan Panjang</label>
-            <select id="wc_unit">
-              <option value="m">Meter (m)</option>
-              <option value="ft">Feet (ft)</option>
-            </select>
-          </div>
-        </div>
-        <button type="button" class="calc" onclick="calcWellCycle()">Hitung Volume & Total Cycle</button>
-        <div class="result-box" id="wc_r">Hasil: —</div>
-      </div>
+      <div class="card">
+        <h3>Buoyed Pipe Weight</h3>
+        <div class="grid">
+          <div><label>Weight in Air (lb)</label><input type="number" id="bwa" step="any"></div>
+          <div><label>BF</label><input type="number" id="bfb" step="any"></div>
+        </div>
+        <button type="button" class="calc" onclick="calcBW()">Hitung</button>
+        <div class="result-box" id="bwr">Hasil: —</div>
+      </div>
+    </section>
 
-      <div class="card">
-        <h3>Pipe Internal Volume (Hitung Cepat)</h3>
-        <div class="grid">
-          <div><label>ID Pipe (in)</label><input type="number" id="pid" step="any"></div>
-          <div><label>Length (ft)</label><input type="number" id="plen" step="any"></div>
-        </div>
-        <button type="button" class="calc" onclick="pi
+    <!-- TAB 6: VOLUME & PIPE -->
+    <section id="sec_volume" style="display: none;">
+      <div class="card">
+        <h3>Well Volume & Total Cycle (Tubing & Annulus)</h3>
+        <div class="grid">
+          <div><label>ID Casing (in)</label><input type="number" id="wc_cid" placeholder="misal 6.184" step="any"></div>
+          <div><label>Panjang Casing</label><input type="number" id="wc_clen" placeholder="misal 1000" step="any"></div>
+          <div><label>OD Tubing (in)</label><input type="number" id="wc_tod" placeholder="misal 2.875" step="any"></div>
+          <div><label>ID Tubing (in)</label><input type="number" id="wc_tid" placeholder="misal 2.441" step="any"></div>
+          <div><label>Panjang Tubing</label><input type="number" id="wc_tlen" placeholder="misal 500" step="any"></div>
+          <div>
+            <label>Satuan Panjang</label>
+            <select id="wc_unit">
+              <option value="m">Meter (m)</option>
+              <option value="ft">Feet (ft)</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="calc" onclick="calcWellCycle()">Hitung Volume & Total Cycle</button>
+        <div class="result-box" id="wc_r">Hasil: —</div>
+      </div>
+
+      <div class="card">
+        <h3>Pipe Internal Volume (Hitung Cepat)</h3>
+        <div class="grid">
+          <div><label>ID Pipe (in)</label><input type="number" id="pid
